@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  console.log("ready");
   $("#tweet-text").keyup(function () {
     let input = $(this).val();
     let length = 140-input.length
