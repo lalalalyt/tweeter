@@ -7,11 +7,15 @@
 $(document).ready(function () {
   $("#post-tweet").submit(function (event) {
     event.preventDefault();
+    if (!$(this[0]).val()){alert("No text entered.")}
+    else if ($(this[0]).val().length>140){alert("Text is too long!")}
+    else{
     $.ajax({
       type: "POST",
       url: "/tweets",
       data: $(this).serialize(),
     });
+  }
   });
 
   const loadTweets = () => {
