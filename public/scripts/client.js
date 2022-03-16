@@ -8,15 +8,27 @@ $(document).ready(function () {
   $("#post-tweet").submit(function (event) {
     event.preventDefault();
     if (!$(this[0]).val()) {
-      let message = "Empty! Please enter your tweet."
-      $('#error-message').text(message)
-      $("#error-message").show("slow");
-
+      $("#error-message").remove();
+      let message = `
+      <div id="error-message">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <p> Empty! Please enter your tweet.</p>
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      `;
+      $("#alert").append(message);
     } else if ($(this[0]).val().length > 140) {
-      let message = "Too Long! Maximum length is 140."
-      $('#error-message').text(message)
-      $("#error-message").show("slow");
+      $("#error-message").remove();
+      let message = `
+      <div id="error-message">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <p>Too Long! Maximum length is 140.</p>
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      `
+      $("#alert").append(message);
     } else {
+      $("#error-message").remove();
       $.ajax({
         type: "POST",
         url: "/tweets",

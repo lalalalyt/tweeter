@@ -5,6 +5,7 @@
 }
 
 #error-message{
+margin-top: 20px;
 color: red;
 border: 5px solid red;
 width: 700px;
@@ -12,6 +13,18 @@ height:70px;
 display: flex;
 justify-content: center;
 align-items: center;
+animation: slide ease-in 0.5s;
+
+}
+
+@keyframes slide{
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+#error-message p {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .new-tweet textarea{
