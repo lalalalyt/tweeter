@@ -41,7 +41,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    
+
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/client.js"></script>
     <script
@@ -72,6 +72,7 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
+        <p id="error-message" hidden></p>
         <form id="post-tweet" action="/tweets" method="POST">
           <textarea
             name="text"

@@ -7,15 +7,25 @@
 $(document).ready(function () {
   $("#post-tweet").submit(function (event) {
     event.preventDefault();
-    if (!$(this[0]).val()){alert("No text entered.")}
-    else if ($(this[0]).val().length>140){alert("Text is too long!")}
-    else{
-    $.ajax({
-      type: "POST",
-      url: "/tweets",
-      data: $(this).serialize(),
-    });
-  }
+    if (!$(this[0]).val()) {
+      let message = "Empty! Please enter your tweet."
+      $('#error-message').text(message)
+      $("#error-message").show("slow");
+
+    } else if ($(this[0]).val().length > 140) {
+      let message = "Too Long! Maximum length is 140."
+      $('#error-message').text(message)
+      $("#error-message").show("slow");
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "/tweets",
+        data: $(this).serialize(),
+      }).then(() => {
+        $(".tweet").remove();
+        loadTweets();
+      });
+    }
   });
 
   const loadTweets = () => {
@@ -26,7 +36,6 @@ $(document).ready(function () {
       renderTweets(results);
     });
   };
-loadTweets()
 
   const createTweetElement = (tweetData) => {
     const tweetElement = `
@@ -39,7 +48,7 @@ loadTweets()
             <div>${tweetData.user.handle}</div>
           </header>
           <p>
-          ${tweetData.content.text}
+          ${escape(tweetData.content.text)}
           </p>
           <footer>
             <div>${timeago.format(tweetData.created_at)}</div>
@@ -55,10 +64,16 @@ loadTweets()
   };
 
   const renderTweets = (tweetArray) => {
-    for (let tweetData of tweetArray) {
+    for (let tweetData of tweetArray.reverse()) {
       let tweet = "";
       tweet += createTweetElement(tweetData);
       $("#all-tweets").append(tweet);
     }
   };
 });
+
+const escape = function (str) {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
