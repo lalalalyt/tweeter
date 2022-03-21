@@ -4,11 +4,17 @@
   align-items:center
 }
 
+#alert{
+width:80%
+}
+
+
 #error-message{
 margin-top: 20px;
+margin-bottom: 15px;
 color: red;
 border: 5px solid red;
-width: 65vw;
+width: 100%;
 height:65px;
 display: flex;
 justify-content: center;

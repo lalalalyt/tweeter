@@ -35,7 +35,9 @@ $(document).ready(function () {
         data: $(this).serialize(),
       }).then(() => {
         $(".tweet").remove();
+        $("textarea").val("")
         loadTweets();
+        
       });
     }
   });
